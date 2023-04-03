@@ -413,7 +413,7 @@ const formatDayOfWeek = (date) => {
 };
 
 async function getWeather(city) {
-	const url = `http://api.weatherapi.com/v1/forecast.json?key=${apiKey}&q=${city}&days=7`;
+	const url = `https://api.weatherapi.com/v1/forecast.json?key=${apiKey}&q=${city}&days=7`;
 	const response = await fetch(url);
 	const data = await response.json();
 	console.log('data', data);
@@ -609,8 +609,8 @@ form.onsubmit = async function (e) {
 			mintemp6: data.forecast.forecastday[6].day.mintemp_c, imgPath6, imageUrl6
 		};
 
-		
-		
+
+
 
 
 
