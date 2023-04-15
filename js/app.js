@@ -4,7 +4,7 @@ import conditions from "./conditions.js";
 
 
 
-const apiKey = 'c48aa2acd1634c8880d143617230304';
+const apiKey = '12d8a80fbd064e199e474530231004 ';
 
 const header = document.querySelector('#header');
 const form = document.querySelector('#form');
@@ -28,7 +28,9 @@ sixDaysFromNow.setDate(today.getDate() + 6);
 
 function removeCard() {
 	const prevCard = document.querySelector('.card');
+	const prevFooter = document.querySelector('.footer');
 	if (prevCard) prevCard.remove();
+	if (prevFooter) prevFooter.remove();
 }
 
 function showError(errorMessage) {
@@ -36,8 +38,9 @@ function showError(errorMessage) {
 	header.insertAdjacentHTML('afterend', html);
 }
 function showCard({
+	tempC, feelslikeC, windKph,
 	localTime, name, country,
-	text0, maxtemp0, mintemp0, imgPath0, imageUrl0,
+	text0, 							imgPath0, imageUrl0,
 	text1, maxtemp1, mintemp1, imgPath1, imageUrl1,
 	text2, maxtemp2, mintemp2, imgPath2, imageUrl2,
 	text3, maxtemp3, mintemp3, imgPath3, imageUrl3,
@@ -45,224 +48,255 @@ function showCard({
 	text5, maxtemp5, mintemp5, imgPath5, imageUrl5,
 	text6, maxtemp6, mintemp6, imgPath6, imageUrl6,
 }) {
+	const adressMaps = "https://yandex.ru/maps/?text=" + encodeURIComponent(name);
+
 	const html = `<div class="card">
-					<div class="location">
-							<img src="./img/geo.png" alt="Location icon">
-							<span>${name}, ${country}</span>
+							<div class="box-info">
+							<div class="location">
+								<a href="${adressMaps}" target="_blank" class="adress-maps">
+									<img src="./img/geo.png" alt="Location icon">
+									<span id="city-name">${name}, ${country}</span>
+								</a>
+							</div>
+
+							<div class='localTime'>${localTime}</div>
 						</div>
-					<div class = 'localTime'>${localTime}</div>
-	
-					<div class="container-main">
 
-						<div class="weather-block">
-							<div class="weather-date">
-								<div class="weather-month">${formatDate(today)}</div>
-								<div class="weather-day">${formatDayOfWeek(today)}</div>
-							</div>
-							<div class="weather-description">
-								<div class="weather-info">
-									<div class="weather-text">${text0}</div>
+
+						<div class="container-main">
+
+							<div class="weather-block">
+								<div class="weather-date">
+									<div class="weather-month">${formatDate(today)}</div>
+									<div class="weather-day">${formatDayOfWeek(today)}</div>
 								</div>
-							</div>
-							<div class="weather-icon">
-								<img class="weather-icon-img" src="${imgPath0}" alt="иконка погоды">
-							</div>
-							<div class="weather-image">
-								<img class="weather-image-human" src="${imageUrl0}" alt="Человек">
-							</div>
-							<div class="temperature-reading-day0">
-								<span>${maxtemp0}
-									<span class='celsius-day'>℃</span>
-								</span>
-							</div>
-							<div class="temperature-reading-night">
-								<span>${mintemp0}
-									<span class='celsius-night'>℃</span>
-								</span>
-							</div>
 
-
-
-						</div>
-						<div class="weather-block">
-							<div class="weather-date">
-								<div class="weather-month">${formatDate(tomorrow)}</div>
-								<div class="weather-day">${formatDayOfWeek(tomorrow)}</div>
-							</div>
-							<div class="weather-description">
-								<div class="weather-info">
-									<div class="weather-text">${text1}</div>
+								<div class="weather-icon">
+									<img class="weather-icon-img" src="${imgPath0}" alt="иконка погоды">
 								</div>
-							</div>
-							<div class="weather-icon">
-								<img class="weather-icon-img" src="${imgPath1}" alt="иконка погоды">
-							</div>
-							<div class="weather-image">
-								<img class="weather-image-human" src="${imageUrl1}" alt="Человек">
-							</div>
-							<div class="temperature-reading-day1">
-								<span >${maxtemp1}
-									<span class='celsius-day'>℃</span>
-								</span>
-							</div>
-							<div class="temperature-reading-night">
-								<span>${mintemp1}
-									<span class='celsius-night'>℃</span>
-								</span>
-							</div>
-
-
-
-						</div>
-						<div class="weather-block">
-							<div class="weather-date">
-								<div class="weather-month">${formatDate(dayAfterTomorrow)}</div>
-								<div class="weather-day">${formatDayOfWeek(dayAfterTomorrow)}</div>
-							</div>
-							<div class="weather-description">
-								<div class="weather-info">
-									<div class="weather-text">${text2}</div>
+								<div class="weather-image">
+									<img class="weather-image-human" src="${imageUrl0}" alt="Человек">
 								</div>
-							</div>
-							<div class="weather-icon">
-								<img class="weather-icon-img" src="${imgPath2}" alt="иконка погоды">
-							</div>
-							<div class="weather-image">
-								<img class="weather-image-human" src="${imageUrl2}" alt="Человек">
-							</div>
-							<div class="temperature-reading-day2">
-								<span>${maxtemp2}
-									<span class='celsius-day'>℃</span>
-								</span>
-							</div>
-							<div class="temperature-reading-night">
-								<span>${mintemp2}
-									<span class='celsius-night'>℃</span>
-								</span>
-							</div>
-
-
-
-						</div>
-						<div class="weather-block">
-							<div class="weather-date">
-								<div class="weather-month">${formatDate(threeDaysFromNow)}</div>
-								<div class="weather-day">${formatDayOfWeek(threeDaysFromNow)}</div>
-							</div>
-							<div class="weather-description">
-								<div class="weather-info">
-									<div class="weather-text">${text3}</div>
+								<div class="weather-box">
+									<div class= "weather-info-day0">
+										<span>${text0}</span>
+									</div>
+									<div class="box-temp">
+										<span class='temp-c'>${tempC}</span>
+											<span class='temp-c-small'>℃</span>
+											
+										<span class='feelslike-c'>${feelslikeC}</span>
+									</div>
 								</div>
-							</div>
-							<div class="weather-icon">
-								<img class="weather-icon-img" src="${imgPath3}" alt="иконка погоды">
-							</div>
-							<div class="weather-image">
-								<img class="weather-image-human" src="${imageUrl3}" alt="Человек">
-							</div>
-							<div class="temperature-reading-day3">
-								<span>${maxtemp3}
-									<span class='celsius-day'>℃</span>
-								</span>
-							</div>
-							<div class="temperature-reading-night">
-								<span>${mintemp3}
-									<span class='celsius-night'>℃</span>
-								</span>
-							</div>
-
-
-
-						</div>
-						<div class="weather-block">
-							<div class="weather-date">
-								<div class="weather-month">${formatDate(fourDaysFromNow)}</div>
-								<div class="weather-day">${formatDayOfWeek(fourDaysFromNow)}</div>
-							</div>
-							<div class="weather-description">
-								<div class="weather-info">
-									<div class="weather-text">${text4}</div>
+								<div class="wind-kph">
+									<span>скорость ветра: <strong>${windKph}</strong> км/ч</span>
 								</div>
-							</div>
-							<div class="weather-icon">
-								<img class="weather-icon-img" src="${imgPath4}" alt="иконка погоды">
-							</div>
-							<div class="weather-image">
-								<img class="weather-image-human" src="${imageUrl4}" alt="Человек">
-							</div>
-							<div class="temperature-reading-day4">
-								<span>${maxtemp4}
-									<span class='celsius-day'>℃</span>
-								</span>
-							</div>
-							<div class="temperature-reading-night">
-								<span>${mintemp4}
-									<span class='celsius-night'>℃</span>
-								</span>
-							</div>
 
 
 
-						</div>
-						<div class="weather-block">
-							<div class="weather-date">
-								<div class="weather-month">${formatDate(fiveDaysFromNow)}</div>
-								<div class="weather-day">${formatDayOfWeek(fiveDaysFromNow)}</div>
 							</div>
-							<div class="weather-description">
-								<div class="weather-info">
-									<div class="weather-text">${text5}</div>
+							<div class="weather-block">
+								<div class="weather-date">
+									<div class="weather-month">${formatDate(tomorrow)}</div>
+									<div class="weather-day">${formatDayOfWeek(tomorrow)}</div>
 								</div>
-							</div>
-							<div class="weather-icon">
-								<img class="weather-icon-img" src="${imgPath5}" alt="иконка погоды">
-							</div>
-							<div class="weather-image">
-								<img class="weather-image-human" src="${imageUrl5}" alt="Человек">
-							</div>
-							<div class="temperature-reading-day5">
-								<span>${maxtemp5}
-									<span class='celsius-day'>℃</span>
-								</span>
-							</div>
-							<div class="temperature-reading-night">
-								<span>${mintemp5}
-									<span class='celsius-night'>℃</span>
-								</span>
-							</div>
-
-
-
-						</div>
-						<div class="weather-block">
-							<div class="weather-date">
-								<div class="weather-month">${formatDate(sixDaysFromNow)}</div>
-								<div class="weather-day">${formatDayOfWeek(sixDaysFromNow)}</div>
-							</div>
-							<div class="weather-description">
-								<div class="weather-info">
-									<div class="weather-text">${text6}</div>
+								<div class="weather-description">
+									<div class="weather-info">
+										<div class="weather-text">${text1}</div>
+									</div>
 								</div>
+								<div class="weather-icon">
+									<img class="weather-icon-img" src="${imgPath1}" alt="иконка погоды">
+								</div>
+								<div class="weather-image">
+									<img class="weather-image-human" src="${imageUrl1}" alt="Человек">
+								</div>
+								<div class="temperature-reading-day1 temperature-reading-day">
+									<span >${maxtemp1}
+										<span class='celsius-day'>℃</span>
+									</span>
+								</div>
+								<div class="temperature-reading-night">
+									<span>${mintemp1}
+										<span class='celsius-night'>℃</span>
+									</span>
+								</div>
+
+
+
 							</div>
-							<div class="weather-icon">
-								<img class="weather-icon-img" src="${imgPath6}" alt="иконка погоды">
+							<div class="weather-block">
+								<div class="weather-date">
+									<div class="weather-month">${formatDate(dayAfterTomorrow)}</div>
+									<div class="weather-day">${formatDayOfWeek(dayAfterTomorrow)}</div>
+								</div>
+								<div class="weather-description">
+									<div class="weather-info">
+										<div class="weather-text">${text2}</div>
+									</div>
+								</div>
+								<div class="weather-icon">
+									<img class="weather-icon-img" src="${imgPath2}" alt="иконка погоды">
+								</div>
+								<div class="weather-image">
+									<img class="weather-image-human" src="${imageUrl2}" alt="Человек">
+								</div>
+								<div class="temperature-reading-day2  temperature-reading-day">
+									<span>${maxtemp2}
+										<span class='celsius-day'>℃</span>
+									</span>
+								</div>
+								<div class="temperature-reading-night">
+									<span>${mintemp2}
+										<span class='celsius-night'>℃</span>
+									</span>
+								</div>
+
+
+
 							</div>
-							<div class="weather-image">
-								<img class="weather-image-human" src="${imageUrl6}" alt="Человек">
+							<div class="weather-block">
+								<div class="weather-date">
+									<div class="weather-month">${formatDate(threeDaysFromNow)}</div>
+									<div class="weather-day">${formatDayOfWeek(threeDaysFromNow)}</div>
+								</div>
+								<div class="weather-description">
+									<div class="weather-info">
+										<div class="weather-text">${text3}</div>
+									</div>
+								</div>
+								<div class="weather-icon">
+									<img class="weather-icon-img" src="${imgPath3}" alt="иконка погоды">
+								</div>
+								<div class="weather-image">
+									<img class="weather-image-human" src="${imageUrl3}" alt="Человек">
+								</div>
+								<div class="temperature-reading-day3  temperature-reading-day">
+									<span>${maxtemp3}
+										<span class='celsius-day'>℃</span>
+									</span>
+								</div>
+								<div class="temperature-reading-night">
+									<span>${mintemp3}
+										<span class='celsius-night'>℃</span>
+									</span>
+								</div>
+
+
+
 							</div>
-							<div class="temperature-reading-day6">
-								<span>${maxtemp6}
-									<span class='celsius-day'>℃</span>
-								</span>
+							<div class="weather-block">
+								<div class="weather-date">
+									<div class="weather-month">${formatDate(fourDaysFromNow)}</div>
+									<div class="weather-day">${formatDayOfWeek(fourDaysFromNow)}</div>
+								</div>
+								<div class="weather-description">
+									<div class="weather-info">
+										<div class="weather-text">${text4}</div>
+									</div>
+								</div>
+								<div class="weather-icon">
+									<img class="weather-icon-img" src="${imgPath4}" alt="иконка погоды">
+								</div>
+								<div class="weather-image">
+									<img class="weather-image-human" src="${imageUrl4}" alt="Человек">
+								</div>
+								<div class="temperature-reading-day4  temperature-reading-day">
+									<span>${maxtemp4}
+										<span class='celsius-day'>℃</span>
+									</span>
+								</div>
+								<div class="temperature-reading-night">
+									<span>${mintemp4}
+										<span class='celsius-night'>℃</span>
+									</span>
+								</div>
+
+
+
 							</div>
-							<div class="temperature-reading-night">
-								<span>${mintemp6}
-									<span class='celsius-night'>℃</span>
-								</span>
+							<div class="weather-block">
+								<div class="weather-date">
+									<div class="weather-month">${formatDate(fiveDaysFromNow)}</div>
+									<div class="weather-day">${formatDayOfWeek(fiveDaysFromNow)}</div>
+								</div>
+								<div class="weather-description">
+									<div class="weather-info">
+										<div class="weather-text">${text5}</div>
+									</div>
+								</div>
+								<div class="weather-icon">
+									<img class="weather-icon-img" src="${imgPath5}" alt="иконка погоды">
+								</div>
+								<div class="weather-image">
+									<img class="weather-image-human" src="${imageUrl5}" alt="Человек">
+								</div>
+								<div class="temperature-reading-day5  temperature-reading-day">
+									<span>${maxtemp5}
+										<span class='celsius-day'>℃</span>
+									</span>
+								</div>
+								<div class="temperature-reading-night">
+									<span>${mintemp5}
+										<span class='celsius-night'>℃</span>
+									</span>
+								</div>
+
+
+
+							</div>
+							<div class="weather-block">
+								<div class="weather-date">
+									<div class="weather-month">${formatDate(sixDaysFromNow)}</div>
+									<div class="weather-day">${formatDayOfWeek(sixDaysFromNow)}</div>
+								</div>
+								<div class="weather-description">
+									<div class="weather-info">
+										<div class="weather-text">${text6}</div>
+									</div>
+								</div>
+								<div class="weather-icon">
+									<img class="weather-icon-img" src="${imgPath6}" alt="иконка погоды">
+								</div>
+								<div class="weather-image">
+									<img class="weather-image-human" src="${imageUrl6}" alt="Человек">
+								</div>
+								<div class="temperature-reading-day6  temperature-reading-day">
+									<span>${maxtemp6}
+										<span class='celsius-day'>℃</span>
+									</span>
+								</div>
+								<div class="temperature-reading-night">
+									<span>${mintemp6}
+										<span class='celsius-night'>℃</span>
+									</span>
+								</div>
 							</div>
 						</div>
 					</div>
-				</div>`;
+					
+					<footer class="footer">
+					<div class="container-footer">
+						<div class="footer-title">
+							<span>© 2023 Andrey-ba-developer</span>
+						</div>
+						<div class="footer-icons">
+							<img src="./img/twitter-logo.png" alt="twitter-logo">
+							<a href="https://github.com/Andrey-Ba-developer" target="_blank">
+								<img class="github-logo" src="./img/github-logo.png" alt="github-logo">
+							</a>
+							<img src="./img/linkedin-logo.png" alt="linkedin-logo">
+						</div>
+					</div>
+				</footer>`;
+
+
+
+	console.log(adressMaps);
+
+
+
+
 
 	header.insertAdjacentHTML('afterend', html);
 
@@ -270,7 +304,7 @@ function showCard({
 
 
 
-	const tempBlockDay0 = document.querySelector('.temperature-reading-day0');
+
 	const tempBlockDay1 = document.querySelector('.temperature-reading-day1');
 	const tempBlockDay2 = document.querySelector('.temperature-reading-day2');
 	const tempBlockDay3 = document.querySelector('.temperature-reading-day3');
@@ -318,72 +352,12 @@ function showCard({
 
 
 
-	tempBlockDay0.style.backgroundColor = interpolateColor(maxtemp0);
-	tempBlockDay0.style.fontSize = '46px';
-	tempBlockDay0.style.textAlign = 'center';
-	tempBlockDay0.style.position = 'absolute';
-	tempBlockDay0.style.bottom = '28px';
-	tempBlockDay0.style.left = '0';
-	tempBlockDay0.style.right = '0';
 	tempBlockDay1.style.backgroundColor = interpolateColor(maxtemp1);
-	tempBlockDay1.style.fontSize = '46px';
-	tempBlockDay1.style.textAlign = 'center';
-	tempBlockDay1.style.position = 'absolute';
-	tempBlockDay1.style.bottom = '28px';
-	tempBlockDay1.style.left = '0';
-	tempBlockDay1.style.right = '0';
 	tempBlockDay2.style.backgroundColor = interpolateColor(maxtemp2);
-	tempBlockDay2.style.fontSize = '46px';
-	tempBlockDay2.style.textAlign = 'center';
-	tempBlockDay2.style.position = 'absolute';
-	tempBlockDay2.style.bottom = '28px';
-	tempBlockDay2.style.left = '0';
-	tempBlockDay2.style.right = '0';
 	tempBlockDay3.style.backgroundColor = interpolateColor(maxtemp3);
-	tempBlockDay3.style.fontSize = '46px';
-	tempBlockDay3.style.textAlign = 'center';
-	tempBlockDay3.style.position = 'absolute';
-	tempBlockDay3.style.bottom = '28px';
-	tempBlockDay3.style.left = '0';
-	tempBlockDay3.style.right = '0';
 	tempBlockDay4.style.backgroundColor = interpolateColor(maxtemp4);
-	tempBlockDay4.style.fontSize = '46px';
-	tempBlockDay4.style.textAlign = 'center';
-	tempBlockDay4.style.position = 'absolute';
-	tempBlockDay4.style.bottom = '28px';
-	tempBlockDay4.style.left = '0';
-	tempBlockDay4.style.right = '0';
 	tempBlockDay5.style.backgroundColor = interpolateColor(maxtemp5);
-	tempBlockDay5.style.fontSize = '46px';
-	tempBlockDay5.style.textAlign = 'center';
-	tempBlockDay5.style.position = 'absolute';
-	tempBlockDay5.style.bottom = '28px';
-	tempBlockDay5.style.left = '0';
-	tempBlockDay5.style.right = '0';
 	tempBlockDay6.style.backgroundColor = interpolateColor(maxtemp6);
-	tempBlockDay6.style.fontSize = '46px';
-	tempBlockDay6.style.textAlign = 'center';
-	tempBlockDay6.style.position = 'absolute';
-	tempBlockDay6.style.bottom = '28px';
-	tempBlockDay6.style.left = '0';
-	tempBlockDay6.style.right = '0';
-
-
-
-
-
-
-
-
-
-
-
-
-	// tempBlockDay1.style.backgroundColor = 'rgb(145 22 182)';
-	// tempBlockDay1.style.fontSize = '46px';
-	// tempBlockDay1.style.textAlign = 'center';
-
-
 }
 
 const formatDate = (date) => {
@@ -583,6 +557,9 @@ form.onsubmit = async function (e) {
 
 
 		const weatherData = {
+			tempC: data.current.temp_c,
+			feelslikeC: data.current.feelslike_c,
+			windKph: data.current.wind_kph,
 			localTime: data.location.localtime,
 			name: data.location.name,
 			country: data.location.country,
