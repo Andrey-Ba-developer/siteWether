@@ -761,12 +761,18 @@ footer {
 	.container-main {
 		max-width: 800px;
 	}
+	.box-info {
+		left: 78px;
+  }
 }
 
 @media (max-width: 840px) {
 	body {
 		background-repeat: repeat;
 	}
+	.box-info {
+		left: 76px;
+  }
 }
 
 @media (max-width: 840px) {
@@ -782,13 +788,13 @@ footer {
 		max-width: 600px;
 	}
 
-	.box-info {
-		left: 235px;
-	}
 
 	form {
 		width: 220px;
 	}
+	.container-main {
+		width: 600px;
+  }
 }
 
 @media (max-width: 640px) {
