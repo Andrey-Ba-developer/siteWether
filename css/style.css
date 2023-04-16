@@ -862,10 +862,11 @@ footer {
 	.box-info {
 		left: 60px;
 	}
+
 	.wind-kph {
 		margin: 0 11px;
 		font-size: 18px;
-  }
+	}
 }
 
 
@@ -1008,9 +1009,15 @@ footer {
 		justify-content: center;
 
 	}
+
 	.search-input {
 		color: #2e0062;
-  }
+	}
+
+	.weather-info-day0 {
+		margin-left: 5px;
+		margin-right: 5px;
+	}
 }
 
 
@@ -1025,8 +1032,8 @@ footer {
 	}
 
 	.weather-date {
-		padding: 20px 11px 0px 11px;
-	}
+		padding: 20px 5px 0px 5px;
+  }
 
 }
 
