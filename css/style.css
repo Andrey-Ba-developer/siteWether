@@ -993,7 +993,7 @@ footer {
 
 	.wind-kph {
 		font-size: 14px;
-		margin: 0 5px;
+		margin: 0 8px;
 	}
 
 	.weather-block:first-of-type {
@@ -1016,5 +1016,13 @@ footer {
 	.weather-date {
 		padding: 20px 11px 0px 11px;
 	}
+
+}
+
+@media (max-width: 330px) {
+	.box-info {
+		left: 8px;
+	}
+
 
 }
