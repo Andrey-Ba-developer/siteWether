@@ -1004,7 +1004,7 @@ footer {
 	}
 
 	.weather-block:first-of-type {
-		justify-content: space-between;
+		justify-content: space-evenly;
 
 	}
 	.search-input {
