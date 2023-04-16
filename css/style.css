@@ -862,6 +862,10 @@ footer {
 	.box-info {
 		left: 60px;
 	}
+	.wind-kph {
+		margin: 0 11px;
+		font-size: 18px;
+  }
 }
 
 
@@ -980,6 +984,7 @@ footer {
 
 	.localTime {
 		margin-left: 7em;
+		font-size: 16px;
 	}
 
 	.celsius-day {
@@ -994,12 +999,17 @@ footer {
 	.wind-kph {
 		font-size: 14px;
 		margin: 0 8px;
+		margin-bottom: 10px;
+
 	}
 
 	.weather-block:first-of-type {
 		justify-content: space-between;
 
 	}
+	.search-input {
+		color: #2e0062;
+  }
 }
 
 
