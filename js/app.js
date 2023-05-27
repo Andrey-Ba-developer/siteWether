@@ -4,7 +4,7 @@ import conditions from "./conditions.js";
 
 
 
-const apiKey = '12d8a80fbd064e199e474530231004 ';
+const apiKey = '7ae3817f7baf45cfb3275300232705';
 
 const header = document.querySelector('#header');
 const form = document.querySelector('#form');
